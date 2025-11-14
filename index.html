@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Patrick Achache</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css">
+  
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <header class="nav-wrap">
+    <div class="container nav-bar">
+      <nav class="nav-left">
+        <a href="#home" class="nav-link">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#charity" class="nav-link">Charity</a>
+      </nav>
+
+      <a href="#home" class="nav-center" aria-label="PA logo">
+        <img src="images/PA-only-logo-new (1) - Copy.png" alt="PA Logo" class="logo-img" />
+      </a>
+
+      <nav class="nav-right">
+        <a href="#associations" class="nav-link">Supported Associations</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <img class="hero-bg" src="images/Buildings.png" alt="" />
+      <div class="hero-shade"></div>
+
+      <div class="hero-content">
+        <img class="hero-portrait" src="images/PA.png" alt="Patrick Achache" />
+
+        <div class="hero-text">
+          <h1 class="display hero-name">PATRICK ACHACHE</h1>
+          <p class="hero-role">FOUNDER, CEO AND ENTREPRENEUR</p>
+        </div>
+      </div>
+    </section>
+
+      <!-- ABOUT SECTION (always visible) -->
+      <section id="about" class="about container">
+        <div class="about-main">
+          <div class="copy">
+            <h1 class="display title">About</h1>
+
+            <p class="kicker">
+              BRIDGING TECHNOLOGY, BUSINESS<br />
+              AND PURPOSE
+            </p>
+
+            <p class="lede">
+              Applying years of expertise in consulting, anti-piracy, and global development.
+            </p>
+
+            <!-- Opens About Me overlay -->
+            <button class="btn js-about-open">Read more</button>
+          </div>
+
+           <div class="image-stack">
+            <figure class="img img--top">
+              <img src="images/DSC_6348-2-scaled.png" alt="">
+            </figure>
+
+            <figure class="img img--bottom">
+              <img src="images/DSC_6349-scaled.png" alt="">
+            </figure>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ABOUT ME OVERLAY (was AboutMe.vue) -->
+      <section id="aboutme-overlay" class="aboutme-overlay">
+          <img class="aboutme-bg" src="images/Buildings.png" alt="">
+        <button class="close-btn js-about-close" aria-label="Close About overlay">×</button>
+        <div class="container aboutme-inner">
+          <div class="photo">
+            <img src="images/PA.png" alt="Patrick Achache portrait" />
+           </div>
+           <div>
+              <h1 class="display title">About</h1>
+
+              <p>
+                Born and raised in Germany, I started my career at Siemens, where I worked on projects
+                involving biometric and RFID security access systems for industrial automation facilities
+                and high-security areas. Before long, my focus shifted to case studies on emerging
+                programming languages, advising on best-practice methods for application development.
+              </p>
+
+              <p>
+                In 2008, I left Germany to work across the globe – starting in Switzerland and soon the UK,
+                the US and Asia. Over the years, I’ve worked as a business development and implementation
+                consultant for various companies.
+              </p>
+
+              <p>
+                I’ve been actively involved in the anti-piracy movement for more than a decade. In addition to that,
+                I collaborate with several charities in different countries around the world. Some of my latest
+                technology projects include Database, File Sharing, Simatic Logon and Software Location. To support
+                clients worldwide, I apply my years of expertise in outsourcing, business development, anti-piracy,
+                project financing, and hotel tourism consulting.
+              </p>
+              </div>
+        </div>
+      </section>
+
+    <!-- CHARITY SUMMARY -->
+    <section id="charity" class="charity">
+      <div class="pattern"></div>
+
+      <div class="container charity-content">
+        <h2 class="display charity-title">CHARITY</h2>
+
+        <p class="charity-lede">
+          Engaging in charitable work is a fundamental part of my mission, as I am committed to leveraging my
+          platform to support meaningful causes. Contributing to initiatives that positively impact communities
+          not only drives real change but also aligns deeply with my personal and professional values.
+        </p>
+
+        <figure class="charity-photo">
+          <img src="images/DSC_6377-scaled.png" alt="Community outreach photo" />
+        </figure>
+
+        <button class="btn js-charity-open">View more</button>
+      </div>
+    </section>
+
+   <section id="charity-overlay" class="charity-all-overlay">
+      <button class="close-btn js-charity-close" aria-label="Close charity view">×</button>
+
+      <img class="bg" src="images/Buildings.png" alt="" />
+
+      <div class="container">
+        <h1 class="display hero-title">CHARITY</h1>
+      </div>
+
+      <div class="container stack">
+        <!-- CARD 1 -->
+        <article class="card charity-card">
+          <figure class="media">
+            <img src="images/DSC_6377-scaled.png" alt="Community outreach group photo" />
+          </figure>
+
+          <div class="body">
+            <h2 class="h2">
+              Supporting the Youngest Victims of STS Trami: Patrick Achache's Aid to
+              Dr. Felipe Cevallos Elementary School
+            </h2>
+            <p class="lede"></p>
+
+            <!-- First paragraph always visible -->
+            <p class="paragraph">
+              On October 22, Severe Typhoon, locally known as Kristine, struck the
+              Philippines with devastating force, triggering heavy rainfall, widespread
+              flooding, and landslides. Among the hardest-hit were vulnerable communities,
+              including children, who were left with little to no resources as they braced
+              for recovery.
+            </p>
+
+            <!-- Extra paragraphs (hidden until expanded) -->
+            <div class="additional-wrapper">
+              <div class="additional-content">
+                <p class="paragraph">
+                  In response, Patrick Achache and the 201st Squadron of the Coast Guard
+                  provided essential aid to the Dr. Felipe Cevallos Elementary School,
+                  bringing relief to 84 young students and their families. The donation
+                  included crucial school supplies, a printer for educational use, and
+                  four sacks of rice, with each child receiving two kilograms. Additionally,
+                  the relief package featured canned goods such as corned beef and four
+                  sacks of used clothing to support families who lost essential items
+                  in the storm.
+                </p>
+                <p class="paragraph">
+                  Achache's efforts are part of his ongoing commitment to disaster relief
+                  and education support, recognizing that the needs of students and their
+                  families go beyond immediate recovery. By providing resources that help
+                  children return to school, he hopes to restore a sense of normalcy,
+                  security, and stability.
+                </p>
+              </div>
+            </div>
+
+            <span class="read">Read more</span>
+          </div>
+        </article>
+
+        <!-- CARD 2 -->
+        <article class="card charity-card">
+          <figure class="media">
+            <img src="images/eeeee (1).png" alt="LA encampment area" />
+          </figure>
+
+          <div class="body">
+            <h2 class="h2">LA Family Housing</h2>
+            <p class="lede"></p>
+
+            <p class="paragraph">
+              One random act of kindness at a time. Patrick never stops to engage in
+              beautiful causes as he supports one of the many associations like
+              LA Family Housing.
+            </p>
+
+            <div class="additional-wrapper">
+              <div class="additional-content">
+                <p class="paragraph">
+                  This organization provides housing and critical, life-saving services
+                  that end homelessness, for good.
+                </p>
+              </div>
+            </div>
+
+            <span class="read">Read more</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+
+<!-- SUPPORTED ASSOCIATIONS -->
+    <section id="associations" class="sa">
+      <div class="pattern"></div>
+
+      <div class="container sa-content">
+        <h2 class="display sa-title">SUPPORTED ASSOCIATIONS</h2>
+
+        <p class="sa-lede">
+          I am proud to support a number of organizations whose missions align with my values.
+          By partnering with these associations, I aim to contribute to sustainable and impactful
+          initiatives that create lasting positive change in our communities.
+        </p>
+
+        <div class="sa-grid">
+          <div class="sa-item">
+            <img src="images/Los_Angeles_Regional_Food_Bank_Logo.png" alt="LA Regional Food Bank" />
+            <div class="sa-hover">
+              <span class="sa-readmore js-sa-open" data-assoc="foodbank">Read More</span>
+            </div>
+          </div>
+          <div class="sa-item">
+            <img src="images/eeeee (1).png" alt="Homeless outreach" />
+            <div class="sa-hover">
+              <span class="sa-readmore js-sa-open" data-assoc="outreach">Read More</span>
+            </div>
+          </div>
+          <div class="sa-item">
+            <img src="images/ye1 (1).png" alt="Groundbreaking ceremony" />
+            <div class="sa-hover">
+              <span class="sa-readmore js-sa-open" data-assoc="groundbreaking">Read More</span>
+            </div>
+          </div>
+          <div class="sa-item">
+            <img src="images/Group 38.png" alt="Art Group" />
+            <div class="sa-hover">
+              <span class="sa-readmore js-sa-open" data-assoc="artgroup">Read More</span>
+            </div>
+          </div>
+          <div class="sa-item">
+            <img src="images/pcga-1 (1).png" alt="Coastal cleanup volunteers" />
+            <div class="sa-hover">
+              <span class="sa-readmore js-sa-open" data-assoc="coastal">Read More</span>
+            </div>
+          </div>
+          <div class="sa-item">
+            <img src="images/image_2022_12_13T10_42_39_411Z.png" alt="Press coverage" />
+            <div class="sa-hover">
+              <span class="sa-readmore js-sa-open" data-assoc="press">Read More</span>
+            </div>
+          </div>
+          <div class="sa-item">
+            <img src="images/Group 38.png" alt="Community advocacy" />
+            <div class="sa-hover">
+              <span class="sa-readmore js-sa-open" data-assoc="advocacy">Read More</span>
+            </div>
+          </div>
+          <div class="sa-item">
+            <img src="images/pcga-2.png" alt="Boat coverage" />
+            <div class="sa-hover">
+              <span class="sa-readmore js-sa-open" data-assoc="boat">Read More</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- keep your existing View All overlay trigger as-is -->
+        <button type="button" class="btn js-assoc-open">View All</button>
+      </div>
+    </section>
+      <section id="sa-foodbank" class="sa-overlay">
+        <button class="close-btn js-sa-close" aria-label="Close LA Food Bank overlay">×</button>
+
+        <img class="bg" src="images/Buildings.png" alt="" />
+
+        <div class="container">
+          <h1 class="display hero-title">SUPPORTED ASSOCIATIONS</h1>
+        </div>
+
+        <div class="container sa-overlay-card">
+          <figure class="sa-overlay-media">
+            <img src="images/Los_Angeles_Regional_Food_Bank_Logo.png" alt="LA Regional Food Bank" />
+          </figure>
+
+          <div class="sa-overlay-body">
+            <h2 class="sa-overlay-title">LOS ANGELES FOOD BANK</h2>
+
+            <p>
+              Patrick advocates the fight against hunger and supports Los Angeles Food Bank.
+            </p>
+
+            <p>
+              Los Angeles Regional Food Bank has worked since 1973 to mobilize resources in
+              the community to alleviate hunger. Through his ongoing involvement, Patrick
+              helps the Food Bank extend its reach to more families in need.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section id="sa-outreach" class="sa-overlay">
+        <button class="close-btn js-sa-close" aria-label="Close outreach overlay">×</button>
+
+        <img class="bg" src="images/Buildings.png" alt="" />
+
+        <div class="container">
+          <h1 class="display hero-title">SUPPORTED ASSOCIATIONS</h1>
+        </div>
+
+        <div class="container sa-overlay-card">
+          <figure class="sa-overlay-media">
+            <img src="images/eeeee (1).png" alt="Homeless outreach" />
+          </figure>
+
+          <div class="sa-overlay-body">
+            <h2 class="sa-overlay-title">LA HOMELESS OUTREACH</h2>
+
+            <p>
+              Patrick actively supports outreach initiatives that provide food, basic services and
+              dignity to people experiencing homelessness in Los Angeles.
+            </p>
+
+            <p>
+              Through on-the-ground support and collaboration with local organizations, these projects
+              aim to create sustainable pathways out of homelessness.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="sa-foodbank" class="sa-overlay">
+        <button class="close-btn js-sa-close" aria-label="Close LA Food Bank overlay">×</button>
+
+        <img class="bg" src="images/Buildings.png" alt="" />
+
+        <div class="container">
+          <h1 class="display hero-title">SUPPORTED ASSOCIATIONS</h1>
+        </div>
+
+        <div class="container sa-overlay-card">
+          <figure class="sa-overlay-media">
+            <img src="images/Los_Angeles_Regional_Food_Bank_Logo.png" alt="LA Regional Food Bank" />
+          </figure>
+
+          <div class="sa-overlay-body">
+            <h2 class="sa-overlay-title">LOS ANGELES FOOD BANK</h2>
+
+            <p>
+              Patrick advocates the fight against hunger and supports Los Angeles Food Bank.
+            </p>
+
+            <p>
+              Los Angeles Regional Food Bank has worked since 1973 to mobilize resources in
+              the community to alleviate hunger. Through his ongoing involvement, Patrick
+              helps the Food Bank extend its reach to more families in need.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section id="sa-groundbreaking" class="sa-overlay">
+        <button class="close-btn js-sa-close" aria-label="Close groundbreaking overlay">×</button>
+
+        <img class="bg" src="images/Buildings.png" alt="" />
+
+        <div class="container">
+          <h1 class="display hero-title">SUPPORTED ASSOCIATIONS</h1>
+        </div>
+
+        <div class="container sa-overlay-card">
+          <figure class="sa-overlay-media">
+            <img src="images/ye1 (1).png" alt="Groundbreaking ceremony" />
+          </figure>
+
+          <div class="sa-overlay-body">
+            <h2 class="sa-overlay-title">DISASTER RELIEF & REBUILDING</h2>
+
+            <p>
+              Patrick supports rebuilding efforts and disaster relief initiatives that restore critical
+              infrastructure and community spaces after major storms and natural disasters.
+            </p>
+
+            <p>
+              These projects help affected families regain stability and hope through long-term,
+              sustainable development.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section id="sa-artgroup" class="sa-overlay">
+        <button class="close-btn js-sa-close" aria-label="Close art group overlay">×</button>
+
+        <img class="bg" src="images/Buildings.png" alt="" />
+
+        <div class="container">
+          <h1 class="display hero-title">SUPPORTED ASSOCIATIONS</h1>
+        </div>
+
+        <div class="container sa-overlay-card">
+          <figure class="sa-overlay-media">
+            <img src="images/Group 38.png" alt="Art Group" />
+          </figure>
+
+          <div class="sa-overlay-body">
+            <h2 class="sa-overlay-title">ART & ADVOCACY INITIATIVES</h2>
+
+            <p>
+              Patrick supports art-focused organizations that use creativity as a tool for advocacy,
+              education and community empowerment.
+            </p>
+
+            <p>
+              Through exhibitions, workshops and public projects, these groups give a voice to
+              underrepresented communities.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section id="sa-coastal" class="sa-overlay">
+        <button class="close-btn js-sa-close" aria-label="Close coastal cleanup overlay">×</button>
+
+        <img class="bg" src="images/Buildings.png" alt="" />
+
+        <div class="container">
+          <h1 class="display hero-title">SUPPORTED ASSOCIATIONS</h1>
+        </div>
+
+        <div class="container sa-overlay-card">
+          <figure class="sa-overlay-media">
+            <img src="images/pcga-1 (1).png" alt="Coastal cleanup volunteers" />
+          </figure>
+
+          <div class="sa-overlay-body">
+            <h2 class="sa-overlay-title">COASTAL CLEANUP INITIATIVES</h2>
+
+            <p>
+              Environmental stewardship is a core value for Patrick, who actively participates in
+              coastal cleanup campaigns.
+            </p>
+
+            <p>
+              These initiatives help reduce ocean pollution, protect marine life and inspire local
+              communities to care for their environment.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section id="sa-press" class="sa-overlay">
+        <button class="close-btn js-sa-close" aria-label="Close press overlay">×</button>
+
+        <img class="bg" src="images/Buildings.png" alt="" />
+
+        <div class="container">
+          <h1 class="display hero-title">SUPPORTED ASSOCIATIONS</h1>
+        </div>
+
+        <div class="container sa-overlay-card">
+          <figure class="sa-overlay-media">
+            <img src="images/image_2022_12_13T10_42_39_411Z.png" alt="Press coverage" />
+          </figure>
+
+          <div class="sa-overlay-body">
+            <h2 class="sa-overlay-title">MEDIA & ADVOCACY PARTNERS</h2>
+
+            <p>
+              Patrick’s charitable and advocacy work has been featured in various media outlets,
+              helping raise awareness for the causes he supports.
+            </p>
+
+            <p>
+              Press coverage amplifies the impact of these initiatives and encourages others
+              to get involved.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section id="sa-advocacy" class="sa-overlay">
+        <button class="close-btn js-sa-close" aria-label="Close advocacy overlay">×</button>
+
+        <img class="bg" src="images/Buildings.png" alt="" />
+
+        <div class="container">
+          <h1 class="display hero-title">SUPPORTED ASSOCIATIONS</h1>
+        </div>
+
+        <div class="container sa-overlay-card">
+          <figure class="sa-overlay-media">
+            <img src="images/Group 38.png" alt="Community advocacy" />
+          </figure>
+
+          <div class="sa-overlay-body">
+            <h2 class="sa-overlay-title">COMMUNITY ADVOCACY GROUPS</h2>
+
+            <p>
+              Patrick collaborates with grassroots organizations that advocate for social justice
+              and human rights.
+            </p>
+
+            <p>
+              These partnerships help support campaigns that protect vulnerable communities and
+              promote long-term positive change.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section id="sa-boat" class="sa-overlay">
+        <button class="close-btn js-sa-close" aria-label="Close boat coverage overlay">×</button>
+
+        <img class="bg" src="images/Buildings.png" alt="" />
+
+        <div class="container">
+          <h1 class="display hero-title">SUPPORTED ASSOCIATIONS</h1>
+        </div>
+
+        <div class="container sa-overlay-card">
+          <figure class="sa-overlay-media">
+            <img src="images/pcga-2.png" alt="Boat coverage" />
+          </figure>
+
+          <div class="sa-overlay-body">
+            <h2 class="sa-overlay-title">MARITIME & COAST GUARD SUPPORT</h2>
+
+            <p>
+              Patrick works closely with maritime and coast guard units on initiatives that enhance
+              safety at sea and support communities along the coast.
+            </p>
+
+            <p>
+              These collaborations include logistics, disaster response and coordinated support for
+              families affected by severe weather events.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SUPPORTED ASSOCIATIONS – ALL (overlay like Charity All) -->
+      <section id="associations-overlay" class="assoc-all-overlay">
+        <button class="close-btn js-assoc-close" aria-label="Close supported associations">×</button>
+
+        <!-- background image (same as Charity All) -->
+        <img class="bg" src="images/Buildings.png" alt="" />
+
+        <div class="container">
+          <h1 class="display hero-title">SUPPORTED ASSOCIATIONS</h1>
+        </div>
+
+        <!-- white rounded stack with cards -->
+        <div class="container assoc-stack">
+          <!-- CARD 1 -->
+          <article class="assoc-card">
+            <figure class="assoc-media">
+              <img src="images/Supported-Associations-Featured-Image (1).png" alt="Society for Threatened People" />
+            </figure>
+
+            <div class="assoc-body">
+              <h2 class="assoc-title">SOCIETY FOR THREATENED PEOPLE</h2>
+              <a href="https://www.gfbv.de/en" class="assoc-link" target="_blank" rel="noopener">
+                https://www.gfbv.de/en
+              </a>
+
+              <p>
+                Patrick himself is a promoter of peace and kindness. His love for people is evident
+                through his support in this organization.
+              </p>
+
+              <p>
+                The Society for Threatened Peoples advocates for threatened ethnic and religious
+                minorities, nationalities, and indigenous communities. (STP) is an international
+                human rights organization that advocates for threatened ethnic and religious
+                minorities, nationalities, and indigenous communities.
+              </p>
+            </div>
+          </article>
+
+          <!-- CARD 2 -->
+          <article class="assoc-card">
+            <figure class="assoc-media">
+              <img src="images/pcga-1 (1) - Copy.png" alt="FUoKK Coastal Cleanup" />
+            </figure>
+
+            <div class="assoc-body">
+              <h2 class="assoc-title">FUoKK</h2>
+              <a href="https://www.fuokk.de/ueber-uns.html" class="assoc-link" target="_blank" rel="noopener">
+                https://www.fuokk.de/ueber-uns.html
+              </a>
+
+              <p>
+                Closest to Patrick's heart are children. He enjoys the company of kids as they give him joy.
+              </p>
+
+              <p>
+                Patrick has been supporting FUoKK which was founded last 29th of August 1990 with members of the
+                association are mostly parents, relatives and acquaintances of affected children, also former patients,
+                interested parties and companies. <span class="assoc-readmore">Read more</span>
+              </p>
+            </div>
+          </article>
+
+          <!-- add more assoc-card blocks as needed -->
+        </div>
+      </section>
+
+    <!-- COMPANIES I WORKED FOR -->
+    <section id="companies" class="companies">
+      <div class="companies-bg"></div>
+
+      <div class="container companies-inner">
+        <h2 class="display companies-title">COMPANIES I WORKED FOR</h2>
+
+        <p class="companies-lede">
+          I am proud to support and collaborate with companies whose missions align with my values.
+          By partnering with these organizations, I aim to contribute to sustainable and impactful
+          initiatives that create lasting positive change in our communities.
+        </p>
+
+        <div class="companies-carousel">
+          <!-- arrows -->
+          <button class="companies-arrow companies-arrow--prev" aria-label="Previous company">
+            ←
+          </button>
+
+          <div class="companies-track">
+            <!-- Each logo bubble -->
+            <div class="company-bubble" data-index="0">
+              <img src="images/Buildings2 - Copy.png" alt="Voltage Pictures" />
+            </div>
+            <div class="company-bubble" data-index="1">
+              <img src="images/Buildings - Copy.png" alt="Swisscom" />
+            </div>
+            <div class="company-bubble" data-index="2">
+              <img src="images/Buildings2 - Copy.png" alt="Mercedes-Benz" />
+            </div>
+            <div class="company-bubble" data-index="3">
+              <img src="images/Buildings - Copy.png" alt="Mirai no Mori" />
+            </div>
+            <div class="company-bubble" data-index="4">
+              <img src="images/Buildings2 - Copy.png" alt="Roche" />
+            </div>
+          </div>
+
+          <button class="companies-arrow companies-arrow--next" aria-label="Next company">
+            →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact">
+      <div class="pattern"></div>
+
+      <div class="contact-grid container">
+        <div class="contact-copy">
+          <h2 class="display contact-title">
+            LET ME KNOW YOUR<br />
+            THOUGHTS
+          </h2>
+          <p class="contact-lede">I would be happy to hear from you.</p>
+        </div>
+
+        <!-- form only HTML/CSS; hook up to your backend/Formspree later -->
+        <form class="contact-form" action="#" method="post">
+          <div class="contact-row">
+            <label class="sr-only" for="first">First name</label>
+            <input
+              id="first"
+              name="first"
+              type="text"
+              class="contact-input"
+              placeholder="First name"
+              autocomplete="given-name"
+            />
+            <label class="sr-only" for="last">Last name</label>
+            <input
+              id="last"
+              name="last"
+              type="text"
+              class="contact-input"
+              placeholder="Last name"
+              autocomplete="family-name"
+            />
+          </div>
+
+          <label class="sr-only" for="email">Email</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            class="contact-input"
+            placeholder="Input email"
+            autocomplete="email"
+          />
+
+          <label class="sr-only" for="subject">Subject</label>
+          <input
+            id="subject"
+            name="subject"
+            type="text"
+            class="contact-input"
+            placeholder="Input subject"
+          />
+
+          <label class="sr-only" for="message">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="8"
+            class="contact-textarea"
+            placeholder="Input message"
+          ></textarea>
+
+          <button type="submit" class="contact-btn">SUBMIT</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Patrick Achache. All rights reserved.
+  </footer>
+
+
+ <script src="script.js"></script>
+</body>
+</html>
