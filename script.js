@@ -39,64 +39,43 @@ document.addEventListener('DOMContentLoaded', function () {
       charityOverlay.classList.remove('is-visible');
     }
   });
-
-  /* ---------------------------
-     READ MORE / READ LESS TOGGLE
-     --------------------------- */
-  const charityCards = document.querySelectorAll('.charity-card');
-
-  charityCards.forEach(card => {
-    const readLabel = card.querySelector('.read');
-
-    // make label clickable only
-    readLabel.style.pointerEvents = "auto";
-    readLabel.style.cursor = "pointer";
-
-    readLabel.addEventListener("click", (e) => {
-      e.stopPropagation();  // prevent entire card from toggling
-
-      card.classList.toggle("expanded");
-
-      // toggle text
-      if (card.classList.contains("expanded")) {
-        readLabel.textContent = "Read less";
-      } else {
-        readLabel.textContent = "Read more";
-      }
-    });
-  });
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  const track = document.querySelector(".companies-track");
+  const track   = document.querySelector(".companies-track");
   const bubbles = Array.from(document.querySelectorAll(".company-bubble"));
+
+  // NEW: arrows
+  const prevBtn = document.querySelector(".companies-arrow--prev");
+  const nextBtn = document.querySelector(".companies-arrow--next");
 
   if (!track || bubbles.length === 0) return;
 
-  const SPACING = 260;   // distance between bubble centers
-  const SPEED = 40;      // auto slide speed (px/sec)
+  const SPACING = 270;   // distance between bubble centers
+  const SPEED   = 40;    // auto slide speed (px/sec)
 
-  let baseOffset = 0;
-  let lastTime = null;
-  let animID = null;
+  let baseOffset   = 0;
+  let lastTime     = null;
+  let animID       = null;
 
   // DRAG VARS
-  let isDragging = false;
-  let dragStartX = 0;
+  let isDragging      = false;
+  let dragStartX      = 0;
   let dragOffsetStart = 0;
+  let hasDragged      = false;   // to detect click vs drag
 
   // ----------------------------------------------------
   // POSITION BUBBLES
   // ----------------------------------------------------
   function layoutBubbles() {
     const trackWidth = track.clientWidth;
-    const centerX = trackWidth / 2;
+    const centerX    = trackWidth / 2;
     const totalWidth = SPACING * bubbles.length;
 
     bubbles.forEach((bubble, i) => {
       let logicalX = i * SPACING + baseOffset;
 
-      // Infinity loop wrap
+      // infinite loop wrap
       let wrapped =
         ((logicalX % totalWidth) + totalWidth) % totalWidth - totalWidth / 2;
 
@@ -109,20 +88,20 @@ document.addEventListener("DOMContentLoaded", () => {
   // CENTER BUBBLE HIGHLIGHT
   // ----------------------------------------------------
   function updateCenterHighlight() {
-    const trackRect = track.getBoundingClientRect();
+    const trackRect   = track.getBoundingClientRect();
     const centerPoint = trackRect.left + trackRect.width / 2;
 
-    let closest = null;
+    let closest     = null;
     let closestDist = Infinity;
 
     bubbles.forEach((bubble) => {
-      const rect = bubble.getBoundingClientRect();
+      const rect         = bubble.getBoundingClientRect();
       const bubbleCenter = rect.left + rect.width / 2;
-      const dist = Math.abs(bubbleCenter - centerPoint);
+      const dist         = Math.abs(bubbleCenter - centerPoint);
 
       if (dist < closestDist) {
         closestDist = dist;
-        closest = bubble;
+        closest     = bubble;
       }
     });
 
@@ -139,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
     lastTime = timestamp;
 
     if (!isDragging) {
-      baseOffset -= SPEED * dt;
+      baseOffset -= SPEED * dt; // move left
     }
 
     const totalWidth = SPACING * bubbles.length;
@@ -155,14 +134,17 @@ document.addEventListener("DOMContentLoaded", () => {
   // DRAG START
   // ----------------------------------------------------
   function dragStart(clientX) {
-    isDragging = true;
-    dragStartX = clientX;
+    isDragging      = true;
+    hasDragged      = false;
+    dragStartX      = clientX;
     dragOffsetStart = baseOffset;
 
     track.classList.add("is-dragging");
 
-    cancelAnimationFrame(animID);
-    animID = null;
+    if (animID) {
+      cancelAnimationFrame(animID);
+      animID = null;
+    }
   }
 
   // ----------------------------------------------------
@@ -172,6 +154,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!isDragging) return;
 
     const delta = clientX - dragStartX;
+    if (Math.abs(delta) > 5) {
+      hasDragged = true;
+    }
+
     baseOffset = dragOffsetStart + delta;
 
     layoutBubbles();
@@ -188,13 +174,23 @@ document.addEventListener("DOMContentLoaded", () => {
     track.classList.remove("is-dragging");
 
     lastTime = null;
-    animID = requestAnimationFrame(loop);
+    animID   = requestAnimationFrame(loop);
   }
 
   // ----------------------------------------------------
   // MOUSE EVENTS
   // ----------------------------------------------------
-  track.addEventListener("mousedown", (e) => dragStart(e.clientX));
+  track.addEventListener("mousedown", (e) => {
+    dragStart(e.clientX);
+  });
+
+  bubbles.forEach((bubble) => {
+    bubble.addEventListener("mousedown", (e) => {
+      e.preventDefault();
+      dragStart(e.clientX);
+    });
+  });
+
   window.addEventListener("mousemove", (e) => dragMove(e.clientX));
   window.addEventListener("mouseup", dragEnd);
 
@@ -214,12 +210,54 @@ document.addEventListener("DOMContentLoaded", () => {
   track.addEventListener("touchend", dragEnd);
 
   // ----------------------------------------------------
+  // PREVENT LINK CLICK WHEN DRAGGED
+  // ----------------------------------------------------
+  bubbles.forEach((bubble) => {
+    const link = bubble.querySelector("a");
+    if (!link) return;
+
+    link.addEventListener("click", (e) => {
+      if (hasDragged) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    });
+  });
+
+  // ----------------------------------------------------
+  // NEW: ARROW BUTTONS
+  // ----------------------------------------------------
+  if (prevBtn) {
+    prevBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      baseOffset += SPACING;        // move bubbles to the right (show previous)
+      layoutBubbles();
+      updateCenterHighlight();
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      baseOffset -= SPACING;        // move bubbles to the left (show next)
+      layoutBubbles();
+      updateCenterHighlight();
+    });
+  }
+
+  // ----------------------------------------------------
   // INIT
   // ----------------------------------------------------
   layoutBubbles();
   updateCenterHighlight();
   animID = requestAnimationFrame(loop);
 });
+
+
 
 // SUPPORTED ASSOCIATIONS "View All" overlay + individual overlays + READ MORE
 document.addEventListener('DOMContentLoaded', function () {

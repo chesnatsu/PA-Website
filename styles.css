@@ -701,7 +701,6 @@
       cursor: pointer;
     }
 
-    .charity-card.expanded,
     .assoc-card.expanded {
       grid-template-columns: 1fr;
     }
@@ -724,9 +723,6 @@
       transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .charity-card.expanded .media img {
-      transform: scale(1.08) translateY(-6%);
-    }
     .assoc-card.expanded .assoc-media img {
       transform: scale(1.08) translateY(-6%);
     }
@@ -735,9 +731,6 @@
       transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .charity-card.expanded .body {
-      transform: translateY(10px);
-    }
     .assoc-card.expanded .body {
       transform: translateY(10px);
     }
@@ -756,29 +749,6 @@
       font-size: 16px;
     }
 
-    .paragraph {
-      color: #4c4c47;
-      line-height: 1.7;
-      margin: 0 0 16px;
-      font-size: 16px;
-    }
-
-    /* smooth expansion for extra paragraphs */
-    .additional-wrapper {
-      overflow: hidden;
-      transition: max-height 0.6s ease, opacity 0.4s ease;
-      max-height: 0;
-      opacity: 0;
-    }
-
-    .charity-card.expanded .additional-wrapper {
-      max-height: 1000px; /* just needs to be larger than content */
-      opacity: 1;
-    }
-    .assoc-card.expanded .additional-wrapper {
-      max-height: 1000px; /* just needs to be larger than content */
-      opacity: 1;
-    }
 
     .additional-content {
       padding-top: 4px;
@@ -787,7 +757,7 @@
     /* read label (clickable via card) */
     .read {
       display: inline-block;
-      margin-top: 4px;
+      margin-top: 15px;
       color: #a8957b;
       font-weight: 600;
       font-size: 15px;
@@ -913,13 +883,22 @@
       padding: 0 16px;
       text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
     }
-
-    .sa-grid {
+    /* TOP ROW — 4 items */
+    .sa-grid-top {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 5px;
       padding: 5px;
-      margin-bottom: 30px;
+      margin-bottom: -4px;
+    }
+
+    /* BOTTOM ROW — 3 items */
+    .sa-grid-bottom {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+      padding: 5px;
+      margin-bottom: 35px;
     }
   
     .sa-item {
@@ -1057,6 +1036,7 @@
       /* container for moving bubbles */
       .companies-track {
         position: relative;
+        margin-bottom: 2%;
         width: 100%;
         height: 450px;
         overflow: hidden;        /* hides bubbles as they go off-screen */
@@ -1084,6 +1064,11 @@
       }
 
       /* Make the link fill the bubble */
+
+      .companies-track.is-dragging {
+        cursor: grabbing !important;
+      }
+
       .company-bubble a {
         display: block;
         width: 100%;
@@ -1112,10 +1097,6 @@
         z-index: 5;
       }
 
-      .companies-track.is-dragging {
-        cursor: grabbing !important;
-      }
-
       /* Hover ANY bubble → full brightness */
       .company-bubble:hover {
         opacity: 1 !important;
@@ -1132,7 +1113,7 @@
         /* arrows */
       .companies-arrow {
         position: absolute;
-        bottom: 10px; /* Position from the bottom */
+        bottom: 20px; /* Position from the bottom */
         width: 46px;
         height: 46px;
         border-radius: 50%;
@@ -1149,7 +1130,7 @@
 
       .companies-arrow--prev {
         left: 50%; /* Horizontally center */
-        margin-left: -100px; /* Move it 60px to the left to create the gap */
+        margin-left: -150px; /* Move it 60px to the left to create the gap */
       }
 
       .companies-arrow--next {
