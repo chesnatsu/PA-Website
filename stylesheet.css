@@ -1,0 +1,65 @@
+/* Balerno Regular */
+@font-face {
+  font-family: "Balerno Serif";
+  src: url("fonts/Balerno-Rg.woff2") format("woff2"),
+       url("fonts/Balerno-Rg.woff") format("woff"),
+       url("fonts/Balerno-Rg.ttf") format("truetype"),
+       url("fonts/Balerno-Rg.eot");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Balerno Regular Italic */
+@font-face {
+  font-family: "Balerno Serif";
+  src: url("fonts/Balerno-RgF.woff2") format("woff2"),
+       url("fonts/Balerno-RgF.woff") format("woff"),
+       url("fonts/Balerno-RgF.ttf") format("truetype"),
+       url("fonts/Balerno-RgF.eot");
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* Balerno Bold */
+@font-face {
+  font-family: "Balerno Serif";
+  src: url("fonts/Balerno-Bd.woff2") format("woff2"),
+       url("fonts/Balerno-Bd.woff") format("woff"),
+       url("fonts/Balerno-Bd.ttf") format("truetype"),
+       url("fonts/Balerno-Bd.eot");
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Balerno Bold Italic */
+@font-face {
+  font-family: "Balerno Serif";
+  src: url("fonts/Balerno-BdF.woff2") format("woff2"),
+       url("fonts/Balerno-BdF.woff") format("woff"),
+       url("fonts/Balerno-BdF.ttf") format("truetype"),
+       url("fonts/Balerno-BdF.eot");
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* Balerno Light */
+@font-face {
+  font-family: "Balerno Serif";
+  src: url("fonts/Balerno-Lt.woff2") format("woff2"),
+       url("fonts/Balerno-Lt.woff") format("woff"),
+       url("fonts/Balerno-Lt.ttf") format("truetype"),
+       url("fonts/Balerno-Lt.eot");
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* Balerno Light Italic */
+@font-face {
+  font-family: "Balerno Serif";
+  src: url("fonts/Balerno-LtF.woff2") format("woff2"),
+       url("fonts/Balerno-LtF.woff") format("woff"),
+       url("fonts/Balerno-LtF.ttf") format("truetype"),
+       url("fonts/Balerno-LtF.eot");
+  font-weight: 300;
+  font-style: italic;
+}

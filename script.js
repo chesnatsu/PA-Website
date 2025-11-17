@@ -318,5 +318,5 @@ window.addEventListener("load", () => {
   const loader = document.getElementById("loader");
   setTimeout(() => {
     loader.classList.add("fade-out");
-  }, 300); // slight delay for smooth effect
+  }, 800); // slight delay for smooth effect
 });
