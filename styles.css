@@ -31,8 +31,13 @@
     }
 
     html {
-      scroll-behavior: smooth;
+      -ms-overflow-style: none;  /* IE/Edge */
+      scrollbar-width: none;     /* Firefox */
       scroll-padding-top: var(--navbar-height);
+    }
+
+    html::-webkit-scrollbar {
+      display: none;             /* Chrome/Safari */
     }
 
     #loader {
@@ -135,7 +140,13 @@
       margin-bottom: -10px;
     }
 
+    .paragraph {
+      margin-bottom: 1.5em;
+    }
 
+    .sa-overlay-body p.paragraph {
+      margin-bottom: 1.5em;
+    }
     /* HERO -------------------------------------------------- */
 
     .hero {
@@ -275,7 +286,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url('assets/about-background.jpg');
+      background-image: url('assets/PA-Images/about-background.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -395,7 +406,81 @@
       display: block;
     }
 
-    /* ABOUT ME OVERLAY */
+    .charity-detail-overlay .bg {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;         /* behind white cards, but inside overlay */
+      pointer-events: none;
+    }
+
+    .charity-detail-overlay {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding-top: calc(var(--navbar-height) + 10px);
+      background: transparent;   /* bg handled by image */
+      overflow-y: auto;
+      z-index: 5000;   
+      opacity: 0;
+      transform: translateY(100%);
+      pointer-events: none;
+      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .charity-detail-overlay.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* Card layout inside full-article view */
+    .charity-detail-card {
+      background: #ffffff;
+      border-radius: 20px 20px 0 0;
+      padding: 40px;
+      margin: 40px auto 0;
+      max-width: 1200px;
+      min-height: calc(100vh - var(--navbar-height) - 40px);
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 32px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+    }
+    /* Full-article sections (hidden by default) */
+    .charity-full {
+      display: none;
+      position: relative;
+      min-height: 100vh;
+      background: var(--bg-dark);
+      color: #fff;
+      padding: clamp(40px, 8vh, 80px) 0 80px;
+    }
+
+    .charity-full.is-visible {
+      display: block;
+    }
+
+    /* reuse charity styles inside if you want */
+    .charity-full .charity-title {
+      margin-bottom: 10px;
+    }
+
+    .charity-full-body {
+      max-width: 900px;
+      margin: 24px auto 0;
+    }
+
+
+    @media (max-width: 900px) {
+      .charity-detail-card {
+        grid-template-columns: 1fr;
+      }
+    }
+       /* ABOUT ME OVERLAY */
     .charity-all-overlay,
     .assoc-all-overlay,
     .sa-overlay,
@@ -415,7 +500,7 @@
       transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
                   transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
-
+    
     .aboutme-overlay.is-visible,
     .charity-all-overlay.is-visible,
     .assoc-all-overlay.is-visible,
@@ -509,7 +594,7 @@
     .pattern {
       position: absolute;
       inset: 0;
-      background-image: url("images/Charity_bg.png"); /* update path */
+      background-image: url("images/PA-Images/Charity_bg.png"); /* update path */
       background-repeat: repeat;
       background-size: 580px auto;
       opacity: 0.75;
@@ -623,7 +708,7 @@
       background: #ffffff;
       border-radius: 20px 20px 0 0;
       padding: 40px;
-      max-width: 1200px;
+      max-width: 1402px;
       height: calc(92vh - var(--navbar-height) - 70px); /* visible height minus navbar + margin */
       overflow-y: auto; /* scroll vertically if content overflows */
       overflow-x: hidden;
@@ -640,12 +725,12 @@
     /* card layout: image left, text right */
 
     .assoc-media {
-        margin: 0;
-        align-self: start;
-        overflow: hidden;
-        width: 100%;
-        height: 250px;
-        border-radius: 12px;
+      margin: 0;
+      align-self: start;
+      overflow: hidden;
+      width: 100%;
+      height: 250px;
+      border-radius: 12px;
     }
 
     .assoc-media img {
@@ -654,7 +739,7 @@
       object-fit: cover;
       border-radius: 12px;
       transform: scale(1) translateY(0);
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .assoc-body {
@@ -701,19 +786,120 @@
       cursor: pointer;
     }
 
-    .assoc-card.expanded {
-      grid-template-columns: 1fr;
+    /* base transition */
+    .charity-card:not(.expanded) .media img,
+    .assoc-card:not(.expanded) .assoc-media img {
+      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    /* hover animation */
+    .charity-card:not(.expanded) .media:hover img,
+    .assoc-card:not(.expanded) .assoc-media:hover img {
+      transform: scale(1.08) rotate(4deg);
+    }
+
+    /* media container for carousel */
     .media {
       margin: 0;
       align-self: start;
       overflow: hidden;
       width: 100%;
-      height: 250px;
+      height: 350px;
       border-radius: 12px;
     }
 
+    /* inner wrapper to control stacking */
+    .media-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* slides are stacked on top of each other */
+    .media-slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+      opacity: 0;
+      transform: scale(1) translateY(0);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    /* active slide */
+    .media-slide.is-active {
+      opacity: 1;
+      transform: scale(1.02);
+    }
+
+    /* carousel arrows (hidden by default) */
+    .media-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: rgba(251, 134, 1, 0.45);
+      color: #fff;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .media-prev {
+      left: 10px;
+    }
+
+    .media-next {
+      right: 10px;
+    }
+
+    /* Dot container (make sure it's visible and above the images) */
+    .media-dots {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;                   /* Ensure above image */
+      display: flex;
+      gap: 10px;
+      padding: 6px 10px;
+      background: rgba(0, 0, 0, 0.25); /* Subtle dark background */
+      border-radius: 20px;
+      backdrop-filter: blur(4px);
+      visibility: visible;             /* Ensure the dots are visible */
+    }
+
+    /* Each dot style (should be larger for better visibility) */
+    .media-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.7); /* Lighter default color */
+      transition: 0.3s ease;
+    }
+
+    /* Active dot style */
+    .media-dot.is-active {
+      background: #ffffff;      /* Pure white for active dot */
+      transform: scale(1.4);     /* Slightly enlarge active dot */
+    }
+
+    /* only show arrows when card is expanded AND there is more than 1 slide */
+    .charity-card.expanded .media-nav {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    
     .media img {
       width: 100%;
       height: 100%;
@@ -723,16 +909,28 @@
       transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .assoc-card.expanded .assoc-media img {
-      transform: scale(1.08) translateY(-6%);
-    }
-    .body {
-      align-self: start;
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    .assoc-card.expanded .assoc-media img,
+    .charity-card.expanded .media img {
+      transform: scale(1) translateY(-1%);
     }
 
-    .assoc-card.expanded .body {
-      transform: translateY(10px);
+    /* when expanded, only the media area grows to 400px */
+    .charity-card.expanded .media,
+    .assoc-card.expanded .assoc-media {
+      height: 450px;
+      }
+    .body {
+      align-self: start;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .assoc-card.expanded .body, .charity-card.expanded .body {
+      transform: translateY(-10px);
+    }
+
+    .assoc-card.expanded,
+    .charity-card.expanded {
+      grid-template-columns: 1fr;
     }
 
     .h2 {
@@ -748,7 +946,6 @@
       color: #6d6b66;
       font-size: 16px;
     }
-
 
     .additional-content {
       padding-top: 4px;
@@ -770,6 +967,37 @@
     .charity-card:hover .read {
       color: #8a7a63;
       border-bottom-color: #a8957b;
+    }
+
+    .charity-pagination {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .charity-page-btn {
+      min-width: 34px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid #d7d0c4;
+      background: #ffffff;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .charity-page-btn.is-active {
+      background: #a8957b;
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+    }
+
+    .charity-page-btn:hover {
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.14);
     }
 
     @media (max-width: 800px) {
@@ -988,7 +1216,7 @@
       .companies-bg {
         position: absolute;
         inset: 0;
-        background-image: url("images/Buildings2.png"); /* update if needed */
+        background-image: url("images/PA-Images/Buildings2.png"); /* update if needed */
         background-size: cover;
         background-position: center;
         filter: brightness(0.4);
@@ -1171,37 +1399,26 @@
       }
 
       /* hidden extra text */
-      .assoc-extra-wrapper {
+      .assoc-extra-wrapper,
+      .charity-extra-wrapper {
         max-height: 0;
         overflow: hidden;
         opacity: 0;
-        transition: max-height 0.6s ease, opacity 0.4s ease;
+        transition: max-height 0.6s ease, opacity 0.5s ease;
       }
 
       /* when card is expanded, reveal */
-      .assoc-card.expanded .assoc-extra-wrapper {
+      .assoc-card.expanded .assoc-extra-wrapper,
+      .charity-card.expanded .charity-extra-wrapper {
         max-height: 1000px; /* big enough for content */
         opacity: 1;
       }
-
 
       .assoc-media img {
         width: 100%;
         border-radius: 14px;
       }
 
-      /* Expand hidden content */
-      .assoc-extra-wrapper {
-        max-height: 0;
-        overflow: hidden;
-        opacity: 0;
-        transition: max-height .6s ease, opacity .4s ease;
-      }
-
-      .assoc-card.expanded .assoc-extra-wrapper {
-        max-height: 1000px;
-        opacity: 1;
-      }
 
       .assoc-read-toggle {
         display: inline-block;
@@ -1251,27 +1468,26 @@
       gap: 16px;
     }
 
-    /* Image container */
-    .sa-overlay-media {
-      margin: 0;
-      border-radius: 18px;
-      overflow: hidden;
-      background: #f5f5f5;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      grid-row: 1;
-      width: 100%;   /* fill horizontal space */
-      height: 400px; /* set desired height, can be relative like 50% if needed */
-    }
+      /* Image container */
+      .sa-overlay-media {
+        margin: 0;
+        border-radius: 18px;
+        overflow: hidden;
+        background: #f5f5f5;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        grid-row: 1;
+        width: 100%;   /* fill horizontal space */
+        height: 400px; /* set desired height, can be relative like 50% if needed */
+      }
 
-    /* Make image cover the container properly */
-    .sa-overlay-media img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover; /* fills container without distortion */
-      object-position: center; /* centers the image */
-    }
-
+      /* Make image cover the container properly */
+      .sa-overlay-media img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* fills container without distortion */
+        object-position: center; /* centers the image */
+      }
 
       .sa-overlay-body {
         align-self: start;
