@@ -33,6 +33,7 @@
     html {
       -ms-overflow-style: none;  /* IE/Edge */
       scrollbar-width: none;     /* Firefox */
+      scroll-behavior: smooth;
       scroll-padding-top: var(--navbar-height);
     }
 
@@ -530,25 +531,22 @@
       background: #ffffff;
       padding: 60px 70px;
       border-radius: 24px 24px 0 0;
-      max-width: 1200px;
+      max-width: 1360px;
       width: 100%;
-      margin: 40px auto 0;
       min-height: calc(100vh - var(--navbar-height) - 40px);
-      height: auto;
+      overflow-y: hidden;
       display: grid;
       grid-template-columns: 1fr 1.4fr;
       gap: 60px;
-      align-items: stretch;
       box-shadow: 0 18px 40px rgba(0,0,0,0.18);
     }
-
 
 
     /* Left portrait container */
     .aboutme-inner .photo {
       border-radius: 16px 16px 0 0;
       background-color: #1e1e1e;
-      height: 109%;
+      height: 108.8%;
       display: flex;
       align-items: flex-end;
     }
@@ -557,7 +555,6 @@
     .aboutme-inner .photo img {
       max-width: 110%;
       height: auto;  
-
       object-fit: center; /* prevents cropping */
     }
 
@@ -718,6 +715,7 @@
     /* Optional: smoother scrolling for nicer UX */
     .assoc-stack::-webkit-scrollbar,
     .stack::-webkit-scrollbar,
+    .aboutme-overlay::-webkit-scrollbar,
     .sa-overlay-card::-webkit-scrollbar {
       width: 8px;
     }
@@ -918,7 +916,8 @@
     .charity-card.expanded .media,
     .assoc-card.expanded .assoc-media {
       height: 450px;
-      }
+    }
+    
     .body {
       align-self: start;
       transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
