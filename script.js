@@ -62,8 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // --- Navigation Link Animations ---
   document.querySelector('[href="#home"]').addEventListener("click", () => {
-    triggerAnimation(heroContent, "left");
-    triggerAnimation(heroText, "right");
+    animateHero();
   });
 
   document.querySelector('[href="#about"]').addEventListener("click", () => {
@@ -529,6 +528,25 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       });
     });
+
+    document.addEventListener("click", function (e) {
+      const overlay = e.target.closest(
+        ".aboutme-overlay, .charity-all-overlay, .assoc-all-overlay, .sa-overlay, .assoc-overlay"
+      );
+
+      // If click is OUTSIDE all overlays → do nothing
+      if (!overlay) return;
+
+      // If click is inside a white card / inner content, don't close
+      const innerCard = e.target.closest(
+        ".aboutme-inner, .stack, .assoc-stack, .sa-overlay-card"
+      );
+      if (innerCard) return;
+
+      // Otherwise, clicked on the backdrop (bg image / empty area) → close
+      overlay.classList.remove("is-visible");
+    });
+
 
     // Function to trigger hero animations
     function animateHero() {
