@@ -1074,7 +1074,31 @@
       gap: 8px;
       margin-top: 24px;
       flex-wrap: wrap;
+      align-items: center;
     }
+
+    /* reuse base button, just add arrow flavour */
+    .charity-page-btn--arrow {
+      font-weight: 600;
+      padding: 6px 10px;
+    }
+
+    /* disabled arrows */
+    .charity-page-btn[disabled] {
+      opacity: 0.4;
+      cursor: default;
+      box-shadow: none;
+    }
+
+    /* the "..." item */
+    .charity-page-ellipsis {
+      min-width: 34px;
+      text-align: center;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      color: #999;
+    }
+
 
     .charity-page-btn {
       min-width: 34px;

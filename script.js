@@ -5,15 +5,16 @@ document.getElementById("year").textContent = new Date().getFullYear();
 function triggerAnimation(element, direction = "left") {
   if (!element) return;
 
-    element.classList.remove("animate-from-left", "animate-from-right");
-  void element.offsetWidth; // reset animation
+  const classMap = {
+    left: "animate-from-left",
+    right: "animate-from-right",
+    top: "animate-from-top",
+    bottom: "animate-from-bottom",
+  };
 
-  if (direction === "left") {
-    element.classList.add("animate-from-left");
-  } else {
-    element.classList.add("animate-from-right");
-  }
-  // remove all animation classes
+  const cls = classMap[direction] || classMap.left;
+
+  // Remove all animation classes
   element.classList.remove(
     "animate-from-left",
     "animate-from-right",
@@ -21,28 +22,18 @@ function triggerAnimation(element, direction = "left") {
     "animate-from-bottom"
   );
 
-  // Force reflow to allow retrigger
+  // Force reflow so the animation restarts
   void element.offsetWidth;
 
-  const classMap = {
-    left: "animate-from-left",
-    right: "animate-from-right",
-    top: "animate-from-top",
-    bottom: "animate-from-bottom"
-  };
-
-  const cls = classMap[direction] || "animate-from-left";
-
+  // Add the new one
   element.classList.add(cls);
 
-  // Remove after animation
   element.addEventListener(
     "animationend",
     () => element.classList.remove(cls),
     { once: true }
   );
 }
-
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -106,64 +97,137 @@ document.addEventListener('DOMContentLoaded', function () {
   /* ---------------------------
      PAGINATION FOR CHARITY CARDS
      --------------------------- */
-  const cards     = Array.from(document.querySelectorAll('#charity-overlay .charity-card'));
-  const pagerRoot = document.getElementById('charity-pagination');
-  const perPage   = 10;
+/* ---------------------------
+   PAGINATION FOR CHARITY CARDS
+   --------------------------- */
+    const cards     = Array.from(document.querySelectorAll('#charity-overlay .charity-card'));
+    const pagerRoot = document.getElementById('charity-pagination');
+    const perPage   = 10;
 
-  if (!cards.length || !pagerRoot) return;
+    if (!cards.length || !pagerRoot) return;
 
-  const totalPages = Math.ceil(cards.length / perPage);
-  let currentPage  = 1;
+    const totalPages = Math.ceil(cards.length / perPage);
+    let currentPage  = 1; // 1-based
 
-  function renderPage(page) {
-    if (page < 1) page = 1;
-    if (page > totalPages) page = totalPages;
-    currentPage = page;
+    function renderPage(page) {
+      if (page < 1) page = 1;
+      if (page > totalPages) page = totalPages;
+      currentPage = page;
 
-    const start = (page - 1) * perPage;
-    const end   = start + perPage;
+      const start = (page - 1) * perPage;
+      const end   = start + perPage;
 
-    cards.forEach((card, index) => {
-      if (index >= start && index < end) {
-        card.style.display = '';
-      } else {
-        card.style.display = 'none';
-      }
-    });
-
-    // update active state on buttons
-    pagerRoot.querySelectorAll('.charity-page-btn').forEach(btn => {
-      const pageNum = Number(btn.dataset.page);
-      btn.classList.toggle('is-active', pageNum === currentPage);
-    });
-
-    // scroll top of stack when changing page
-    const stack = document.getElementById('charity-stack');
-    if (stack) {
-      stack.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  }
-
-  function buildPager() {
-    pagerRoot.innerHTML = '';
-
-    for (let i = 1; i <= totalPages; i++) {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'charity-page-btn';
-      btn.textContent = i;
-      btn.dataset.page = i;
-
-      btn.addEventListener('click', () => {
-        renderPage(i);
+      cards.forEach((card, index) => {
+        card.style.display = (index >= start && index < end) ? "" : "none";
       });
 
-      pagerRoot.appendChild(btn);
-    }
-  }
+      // rebuild pager to reflect current page, arrows, ellipses
+      buildPager();
 
-  buildPager();
-  renderPage(1);
+      // scroll top of stack when changing page
+      const stack = document.getElementById('charity-stack');
+      if (stack) {
+        stack.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function buildPager() {
+      pagerRoot.innerHTML = "";
+      if (totalPages <= 1) return;
+
+      const MAX_VISIBLE = 3; // how many numeric buttons (excluding first/last) we try to show
+
+      function createPageBtn(pageNum) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'charity-page-btn';
+        btn.textContent = pageNum;
+        btn.dataset.page = pageNum;
+        if (pageNum === currentPage) {
+          btn.classList.add('is-active');
+        }
+        btn.addEventListener('click', () => renderPage(pageNum));
+        return btn;
+      }
+
+      function createArrowBtn(direction) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'charity-page-btn charity-page-btn--arrow';
+
+        btn.innerHTML = direction === 'prev' ? '&lsaquo;' : '&rsaquo;';
+
+        const target = direction === 'prev' ? currentPage - 1 : currentPage + 1;
+        const disabled =
+          (direction === 'prev' && currentPage === 1) ||
+          (direction === 'next' && currentPage === totalPages);
+
+        if (disabled) {
+          btn.disabled = true;
+        } else {
+          btn.addEventListener('click', () => renderPage(target));
+        }
+
+        return btn;
+      }
+
+      function addEllipsis() {
+        const span = document.createElement('span');
+        span.className = 'charity-page-ellipsis';
+        span.textContent = '…';
+        pagerRoot.appendChild(span);
+      }
+
+      // PREV ARROW
+      pagerRoot.appendChild(createArrowBtn('prev'));
+
+      // If total pages small: show all
+      if (totalPages <= MAX_VISIBLE + 2) {
+        for (let i = 1; i <= totalPages; i++) {
+          pagerRoot.appendChild(createPageBtn(i));
+        }
+      } else {
+        // Always show first and last
+        const firstPage = 1;
+        const lastPage  = totalPages;
+
+        // Middle window around current page
+        let start = currentPage - 1;
+        let end   = currentPage + 1;
+
+        if (start <= 2) {
+          start = 2;
+          end   = start + (MAX_VISIBLE - 1);
+        } else if (end >= lastPage - 1) {
+          end   = lastPage - 1;
+          start = end - (MAX_VISIBLE - 1);
+        }
+
+        // 1
+        pagerRoot.appendChild(createPageBtn(firstPage));
+
+        // left ellipsis
+        if (start > 2) addEllipsis();
+
+        // middle pages
+        for (let p = start; p <= end && p < lastPage; p++) {
+          pagerRoot.appendChild(createPageBtn(p));
+        }
+
+        // right ellipsis
+        if (end < lastPage - 1) addEllipsis();
+
+        // last
+        pagerRoot.appendChild(createPageBtn(lastPage));
+      }
+
+      // NEXT ARROW
+      pagerRoot.appendChild(createArrowBtn('next'));
+    }
+
+    // init
+    renderPage(1);
+
 
 /* ------------------------------------------
    READ MORE / READ LESS + MEDIA CAROUSEL + DOTS
