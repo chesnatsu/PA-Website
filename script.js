@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (aboutOverlay && aboutOpen) {
     aboutOpen.addEventListener('click', () => {
-      aboutOverlay.classList.add('is-visible');
+      showOverlay(aboutOverlay);
     });
 
     aboutOverlay.addEventListener('click', (e) => {
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // OPEN overlay
   charityOpen.addEventListener('click', () => {
-    charityOverlay.classList.add('is-visible');
+    showOverlay(charityOverlay);
   });
 
   // CLOSE overlay by clicking backdrop
@@ -422,9 +422,9 @@ document.addEventListener('DOMContentLoaded', function () {
           const key = btn.dataset.assoc;            // e.g. "foodbank"
           const overlay = document.getElementById('sa-' + key); // "sa-foodbank"
 
-          if (overlay) {
-            overlay.classList.add('is-visible');
-          }
+            if (overlay) {
+              showOverlay(overlay);
+            }
         });
       });
 
@@ -442,9 +442,8 @@ document.addEventListener('DOMContentLoaded', function () {
         B. View All overlay (associations-overlay)
         ------------------------------------------ */
       if (assocOverlay && assocOpen) {
-        // open
         assocOpen.addEventListener('click', () => {
-          assocOverlay.classList.add('is-visible');
+          showOverlay(assocOverlay);
         });
 
         // close by clicking backdrop
@@ -638,6 +637,37 @@ document.addEventListener('DOMContentLoaded', function () {
       animateHero();
     });
 
+    // Helper: open overlay + register a history state
+    function showOverlay(overlayEl) {
+      if (!overlayEl) return;
+
+      overlayEl.classList.add("is-visible");
+
+      // Add a history entry so Back/Forward stays on the same page,
+      // but triggers a popstate event we can react to.
+      try {
+        history.pushState(
+          { overlay: overlayEl.id || true },
+          "",
+          window.location.href  // keep same URL
+        );
+      } catch (err) {
+        // fail silently if history is blocked
+      }
+    }
+
+    // Close all overlays whenever history changes (back OR forward)
+    window.addEventListener("popstate", () => {
+      const allOverlays = document.querySelectorAll(
+        ".aboutme-overlay, " +
+        ".charity-all-overlay, " +
+        ".assoc-all-overlay, " +
+        ".sa-overlay, " +
+        ".assoc-overlay"
+      );
+
+      allOverlays.forEach(ov => ov.classList.remove("is-visible"));
+    });
 
   // ----------------------------------------------------
   // COMPANIES I WORKED FOR
