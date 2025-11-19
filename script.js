@@ -699,3 +699,171 @@ document.addEventListener("DOMContentLoaded", () => {
   updateCenterHighlight();
   animID = requestAnimationFrame(loop);
 });
+
+/* =====================================================
+   CLICK IMAGE TO VIEW FULLSCREEN + TOOLBAR BUTTONS
+===================================================== */
+document.addEventListener("DOMContentLoaded", () => {
+  const lightbox = document.getElementById("image-lightbox");
+  const lightboxImg = lightbox.querySelector(".lightbox-img");
+
+  /* --- CREATE TOOLBAR CONTAINER --- */
+  const controls = document.createElement("div");
+  controls.classList.add("lightbox-controls");
+  lightbox.appendChild(controls);
+
+  /* --- BUTTONS --- */
+  const zoomBtn = document.createElement("button");
+  zoomBtn.classList.add("zoom-in-btn");
+  zoomBtn.innerHTML = "🔍";
+
+  const fullscreenBtn = document.createElement("button");
+  fullscreenBtn.classList.add("fullscreen-btn");
+  fullscreenBtn.innerHTML = "⛶";
+
+  const shareBtn = document.createElement("button");
+  shareBtn.classList.add("share-btn");
+  shareBtn.innerHTML = "↗";
+
+  const closeBtn = document.createElement("button");
+  closeBtn.classList.add("lightbox-close");
+  closeBtn.innerHTML = "✕";
+
+  /* Add buttons in order */
+  controls.appendChild(zoomBtn);
+  controls.appendChild(fullscreenBtn);
+  controls.appendChild(shareBtn);
+  controls.appendChild(closeBtn);
+
+  /* --- SHARE MENU --- */
+  const shareMenu = document.createElement("div");
+  shareMenu.classList.add("share-menu");
+  shareMenu.innerHTML = `
+    <ul>
+      <li data-share="facebook">
+        <img 
+          src="https://img.icons8.com/color/24/000000/facebook-new.png" 
+          alt="Facebook" 
+          style="vertical-align: middle; margin-right: 8px; width: 20px; height: 20px;" 
+        />
+        Share on Facebook
+      </li>
+      <li data-share="twitter">
+        <img 
+          src="https://img.icons8.com/color/24/000000/twitter--v1.png" 
+          alt="Twitter" 
+          style="vertical-align: middle; margin-right: 8px; width: 20px; height: 20px;" 
+        />
+        Share on Twitter
+      </li>
+      <li data-share="pinterest">
+        <img 
+          src="https://img.icons8.com/color/24/000000/pinterest--v1.png" 
+          alt="Pinterest" 
+          style="vertical-align: middle; margin-right: 8px; width: 20px; height: 20px;" 
+        />
+        Pin it
+      </li>
+      <li data-download>
+        <img 
+          src="https://img.icons8.com/color/24/000000/download--v1.png" 
+          alt="Download" 
+          style="vertical-align: middle; margin-right: 8px; width: 20px; height: 20px;" 
+        />
+        Download image
+      </li>
+    </ul>
+  `;
+  lightbox.appendChild(shareMenu);
+
+
+  /* -----------------------------
+      OPEN LIGHTBOX ON IMAGE CLICK
+  ------------------------------ */
+  document.querySelectorAll(".assoc-media img, .media-slide").forEach(img => {
+    img.style.cursor = "zoom-in";
+
+    img.addEventListener("click", (e) => {
+      e.stopPropagation();
+
+      // If it’s from a carousel, always get the active one
+      let src = img.src;
+      if (img.classList.contains("media-slide")) {
+        const active = img.parentElement.querySelector(".media-slide.is-active");
+        if (active) src = active.src;
+      }
+
+      lightboxImg.src = src;
+      lightbox.classList.add("active");
+      document.body.style.overflow = "hidden";
+    });
+  });
+
+  /* --- CLOSE LIGHTBOX --- */
+  const closeLightbox = () => {
+    lightbox.classList.remove("active");
+    lightboxImg.style.transform = "scale(1)";
+    shareMenu.classList.remove("open");
+    document.body.style.overflow = "";
+  };
+
+  closeBtn.addEventListener("click", closeLightbox);
+
+  lightbox.addEventListener("click", (e) => {
+    if (e.target.classList.contains("lightbox-backdrop")) {
+      closeLightbox();
+    }
+  });
+
+  /* --- ZOOM BUTTON --- */
+  zoomBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    lightboxImg.style.transform =
+      lightboxImg.style.transform === "scale(2)" ? "scale(1)" : "scale(2)";
+  });
+
+  /* --- FULLSCREEN BUTTON --- */
+  fullscreenBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (!document.fullscreenElement) {
+      lightbox.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  });
+
+  /* --- SHARE BUTTON --- */
+  shareBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    shareMenu.classList.toggle("open");
+  });
+
+  /* --- SHARE MENU ACTIONS --- */
+  shareMenu.addEventListener("click", (e) => {
+    const imgUrl = lightboxImg.src;
+
+    // Share services
+    if (e.target.dataset.share === "facebook") {
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(imgUrl)}`);
+    }
+    if (e.target.dataset.share === "twitter") {
+      window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(imgUrl)}`);
+    }
+    if (e.target.dataset.share === "pinterest") {
+      window.open(`https://pinterest.com/pin/create/button/?media=${encodeURIComponent(imgUrl)}`);
+    }
+
+    // Download
+    if (e.target.dataset.download !== undefined) {
+      const a = document.createElement("a");
+      a.href = imgUrl;
+      a.download = imgUrl.split("/").pop();
+      a.click();
+    }
+  });
+
+  /* Close menu when clicking outside */
+  document.addEventListener("click", () => {
+    shareMenu.classList.remove("open");
+  });
+});

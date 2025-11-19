@@ -148,6 +148,106 @@
     .sa-overlay-body p.paragraph {
       margin-bottom: 1.5em;
     }
+    
+    /* Lightbox container */
+    #image-lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 99999;
+    }
+
+    #image-lightbox.active {
+      display: flex;
+    }
+
+    .lightbox-img {
+      max-width: 92vw;
+      max-height: 92vh;
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    /* Top-right controls */
+    .lightbox-controls {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      display: flex;
+      gap: 12px;
+      z-index: 100001;
+    }
+
+    /* Button styles */
+    .zoom-in-btn,
+    .fullscreen-btn,
+    .lightbox-close,
+    .share-btn {
+      font-size: 15px;
+      color: white;
+      background: rgba(0, 0, 0, 0.55);
+      border: none;
+      padding: 2px 5px;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      user-select: none;
+    }
+
+    /* Share menu */
+    .share-menu {
+      position: absolute;
+      top: 55px;
+      right: 40px;
+      background: white;
+      border-radius: 5px;
+      display: none;
+      min-width: 150px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      z-index: 100002;
+    }
+
+    /* ▼ THE ARROW (triangle pointer) */
+    .share-menu::before {
+      content: "";
+      position: absolute;
+      top: -10px; /* moves above menu */
+      right: 18px; /* align with share button */
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 10px solid white; /* arrow color */
+      filter: drop-shadow(0 -1px 1px rgba(0,0,0,0.15)); /* slight shadow */
+    }
+
+    .share-menu.open {
+      display: block;
+    }
+
+    .share-menu ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .share-menu li {
+      padding: 6px 16px;
+      cursor: pointer;
+      font-size: 10px;
+      color: #000000;
+      display: flex;
+      align-items: center;
+    }
+
+    .share-menu li:hover {
+      background: #f2f2f2;
+    }
+
+
     /* HERO -------------------------------------------------- */
 
     .hero {
@@ -740,7 +840,12 @@
       transform: scale(1) translateY(0);
       transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-
+    .assoc-media img {
+      pointer-events: auto !important;
+      position: relative;
+      z-index: 10;
+      cursor: zoom-in;
+    }
     .assoc-body {
       align-self: start;
     }
@@ -863,6 +968,7 @@
     .media-slide.is-active {
       opacity: 1;
       transform: scale(1.02);
+      pointer-events: auto;
     }
 
     /* carousel arrows (hidden by default) */
