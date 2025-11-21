@@ -777,7 +777,7 @@
     .assoc-all-overlay .hero-title,
     .sa-overlay .hero-title  {
       text-align: center;
-      font: normal normal normal 65px/145px Balerno Serif;
+      font: normal normal normal 65px/130px Balerno Serif;
       letter-spacing: 7.17px;
       color: #ffffff;
    
@@ -1236,7 +1236,6 @@
       background: var(--bg-dark);
       color: #fff;
       display: flex;
-      align-items: center;
       justify-content: center;
       overflow: hidden;
     }
@@ -1249,7 +1248,7 @@
     }
 
     .sa-title {
-      font: normal normal normal 70px/100px var(--font-display);
+      font: normal normal normal 70px/120px var(--font-display);
       letter-spacing: 7.58px;
       color: #a39784;
     }
