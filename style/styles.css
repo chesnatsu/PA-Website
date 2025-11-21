@@ -1708,6 +1708,7 @@
     .sa-overlay-body {
       align-self: start;
       grid-row: 2;
+      padding: 0 40px;
     }
 
     .sa-overlay-title {
@@ -1719,7 +1720,7 @@
     }
 
     .sa-overlay-body p {
-      font: normal normal normal 16px/25px Oxygen;
+      font: normal normal normal 15px/25px Oxygen;
       letter-spacing: 1.7px;
       color: #434343;
       opacity: 1;
