@@ -823,7 +823,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!track || bubbles.length === 0) return;
 
-  const SPACING = 270;   // distance between bubble centers
+  const SPACING = 300;   // distance between bubble centers
   const SPEED   = 40;    // auto slide speed (px/sec)
 
   let baseOffset   = 0;
