@@ -292,13 +292,13 @@
     }
 
     .hero-portrait {
-      width: clamp(400px, 42vw, 700px);
+      width: clamp(500px, 42vw, 700px); /* Responsive width with a range */
       height: auto;
-      object-fit: contain;
+      object-fit: contain; /* Maintain aspect ratio without stretching */
       align-self: flex-end;
       margin-left: -8vh;
       filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.35));
-
+      transition: all 0.3s ease; /* Smooth transition for resizing */
     }
 
     .hero-text {
@@ -318,15 +318,86 @@
 
     .hero-role {
       margin: 30px 0 0 0;
-      font: normal normal normal 22px/28px Oxygen;
-      letter-spacing: 8.8px;  
+      font-size: clamp(0.7rem, 1.6vw, 22px);
+      letter-spacing: clamp(3px, 1vw, 8.8px);
       text-transform: uppercase;
       color: rgba(255, 255, 255, 0.86);
       font-weight: 400;
       text-align: center;
       opacity: 0.7;
     }
+    /* For larger devices (e.g., desktop) */
+    @media (min-width: 1200px) {
+      .hero {
+        height: calc(100vh - var(--navbar-height)); /* Ensure full screen height */
+      }
 
+      .hero-portrait {
+        width: clamp(600px, 36vw, 800px); /* Adjust the max-width of the portrait */
+      }
+      .hero-name {
+        font-size: 6.8rem; /* Larger text on big screens */
+      }
+
+      .hero-role {
+        font-size: 1.5rem; /* Larger role font on big screens */
+      }
+    }
+    @media (max-width: 1100px), (max-height: 780px) {
+      .hero {
+        height: calc(100vh - var(--navbar-height)); /* Ensure full screen height */
+      }
+
+      .hero-portrait {
+        width: clamp(500px, 36vw, 650px); /* Adjust the max-width of the portrait */
+      }
+      .hero-name {
+        font-size: 5.8rem; /* Larger text on big screens */
+      }
+
+      .hero-role {
+        font-size: 1.0rem; /* Larger role font on big screens */
+      }
+    }
+
+    /* Stack portrait ABOVE the text on smaller desktops */
+    @media (max-width: 900px), (max-height: 700px) {
+      .hero {
+        height: auto;
+        min-height: calc(100vh - var(--navbar-height));
+        padding: 0 20px 50px;
+        overflow: visible;
+        display: flex;
+        align-items: center;
+      }
+
+      .hero-content {
+        flex-direction: column;   
+        align-items: center;
+        justify-content: flex-start;
+        text-align: center;
+        width: 100%;
+        gap: 30px;
+      }
+
+      .hero-portrait {
+        width: clamp(300px, 30vw, 400px); /* smaller + more balanced */
+        margin-left: 0 !important;
+        margin-bottom: -10px;
+        align-self: center;
+      }
+
+      .hero-text {
+        margin-bottom: 0 !important;
+        text-align: center;
+        align-self: center;
+      }
+
+      .hero-name {
+        font-size: clamp(48px, 6vw, 88px);
+        line-height: 1.1;
+      }
+    }
 
     /* ABOUT VIEW (same look as your Vue version) */
     .about {
@@ -380,6 +451,7 @@
     .copy{
       position: relative;
       bottom: 5%;
+      left: 7%;
     }
     .title {
       margin: 0 0 -20px;
@@ -447,7 +519,7 @@
     /* TOP IMAGE (smaller, top-right) */
     .img--top {
       width: 505px;
-      right: -2%;
+      right: 5%;
       top: 2%;
       z-index: 2;
     }
@@ -455,7 +527,7 @@
     /* BOTTOM IMAGE (larger, shifted left and down) */
     .img--bottom {
       width: 568px;
-      left: -58%;
+      left: -35%;
       bottom: -15%;
       z-index: 2;
     }
