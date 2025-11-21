@@ -1711,7 +1711,7 @@
     }
 
     .sa-overlay-title {
-      margin: 0 0 12px;
+      margin: 0 0 20px;
       font: normal normal bold 32px/45px Oxygen;
       letter-spacing: 3.2px;
       color: #434343;
@@ -1719,8 +1719,7 @@
     }
 
     .sa-overlay-body p {
-      margin: 0;
-      font: normal normal normal 12px/20px Oxygen;
+      font: normal normal normal 16px/25px Oxygen;
       letter-spacing: 1.7px;
       color: #434343;
       opacity: 1;
