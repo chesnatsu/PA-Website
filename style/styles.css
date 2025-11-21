@@ -102,7 +102,7 @@
     .nav-left,
     .nav-right {
       display: flex;
-      gap: 150px;
+      gap: 120px;
       align-items: center;
     }
     .nav-right{
