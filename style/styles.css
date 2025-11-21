@@ -717,14 +717,14 @@
     }
 
     .charity-title {
-      font: normal normal bold 80px/110px Balerno Serif;
+      font: normal normal bold 80px/130px Balerno Serif;
       letter-spacing: 14.1px;
       color: #A39784;
       opacity: 1;
     }
 
     .charity-lede {
-      margin: 0 auto clamp(28px, 6vh, 44px);
+      margin: 0 auto clamp(28px, 8vh, 35px);
       font: normal normal normal 12px/25px Oxygen;
       letter-spacing: 1.7px;
       color: #FFFFFF;
@@ -734,7 +734,7 @@
 
     .charity-photo {
       width: min(1100px, 92vw);
-      margin: 0 auto clamp(22px, 6vh, 38px);
+      margin: 0 auto clamp(25px, 10vh, 48px);
       background: #000;
       border-radius: 10px;
       overflow: hidden;
@@ -1384,7 +1384,6 @@
       font: normal normal bold 55px/127px Balerno Serif;
       letter-spacing: 6.26px;
       color: #A39784;
-      opacity: 1;
     }
 
     .companies-lede p {
