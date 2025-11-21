@@ -413,31 +413,6 @@
       background: #f8f8f8;
     }
 
-    /* Background Image - Cover Entire Page */
-    .background-image {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('../images/PA-Images/about-background.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      z-index: -1;
-      opacity: 0.35;
-    }
-
-    .background-image::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.85);
-    }
-
     /* About main layout */
     .about-main {
       display: grid;
@@ -521,7 +496,6 @@
     /* TOP IMAGE (smaller, top-right) */
     .img--top {
       width: 505px;
-      
       top: 2%;
       z-index: 2;
     }
@@ -529,8 +503,8 @@
     /* BOTTOM IMAGE (larger, shifted left and down) */
     .img--bottom {
       width: 568px;
-      left: -55%;
-      bottom: -15%;
+      left: -60%;
+      bottom: -14%;
       z-index: 2;
     }
       
@@ -606,10 +580,6 @@
       display: block;
     }
 
-    /* reuse charity styles inside if you want */
-    .charity-full .charity-title {
-      margin-bottom: 10px;
-    }
 
     .charity-full-body {
       max-width: 900px;
@@ -742,13 +712,12 @@
       position: relative;
       z-index: 1;
       text-align: center;
-      margin-bottom: 10%;
-      top: -45px;
+      margin-bottom: 5%;
+      
     }
 
     .charity-title {
-      margin: 0 0 -20px;
-      font: normal normal bold 80px/190px Balerno Serif;
+      font: normal normal bold 80px/110px Balerno Serif;
       letter-spacing: 14.1px;
       color: #A39784;
       opacity: 1;
@@ -765,7 +734,7 @@
 
     .charity-photo {
       width: min(1100px, 92vw);
-      margin: 0 auto clamp(22px, 6vh, 36px);
+      margin: 0 auto clamp(22px, 6vh, 38px);
       background: #000;
       border-radius: 10px;
       overflow: hidden;
@@ -808,10 +777,10 @@
     .assoc-all-overlay .hero-title,
     .sa-overlay .hero-title  {
       text-align: center;
-      font: normal normal normal 71px/154px Balerno Serif;
+      font: normal normal normal 65px/145px Balerno Serif;
       letter-spacing: 7.17px;
       color: #ffffff;
-      margin-bottom: -1%;
+   
     }
 
     /* === SUPPORTED ASSOCIATIONS – ALL OVERLAY (Charity All style) === */
@@ -882,6 +851,7 @@
       color: #7a90b8;
       text-decoration: none;
     }
+
     .assoc-link:hover {
       text-decoration: underline;
     }
@@ -1274,27 +1244,25 @@
     .sa-content {
       position: relative;
       z-index: 1;
-      padding: clamp(28px, 6vh, 60px) 0 clamp(40px, 8vh, 96px);
       text-align: center;
-      top: -95px;
+      margin-bottom: 6%;
     }
 
     .sa-title {
-      margin: 10px 0 -20px;
-      font: normal normal normal 70px/154px var(--font-display);
+      font: normal normal normal 70px/100px var(--font-display);
       letter-spacing: 7.58px;
       color: #a39784;
     }
 
     .sa-lede {
-      padding-top: 1%;
-      margin: 0 auto clamp(10px, 10vh, 40px);
+      margin: 0 auto clamp(10px, 3vh, 40px);
       font: normal normal normal 12px/25px Oxygen;
       letter-spacing: 1.7px;
       color: #FFFFFF;
       opacity: 1;
       text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
     }
+
     /* TOP ROW — 3 items */
     .sa-grid-top {
       display: grid;
@@ -1606,11 +1574,9 @@
 
     .sa-overlay .hero-title {
       text-align: center;
-      font: normal normal normal 71px/154px Balerno Serif;
+      font: normal normal normal 65px/145px Balerno Serif;
       letter-spacing: 7.17px;
       color: #ffffff;
-      margin-bottom: -4%;
-      
     }
 
     /* White card */
@@ -1618,9 +1584,8 @@
       background: #ffffff;
       border-radius: 20px 20px 0 0;
       padding: 40px;
-      margin: 40px auto 0;
       max-width: 1360px;
-      height: calc(95vh - var(--navbar-height) - 50px);/* visible height minus navbar + margin */
+      height: calc(90vh - var(--navbar-height) - 40px);/* visible height minus navbar + margin */
       overflow: auto; /* prevent overflow */
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
       display: grid;
@@ -1672,13 +1637,12 @@
     }
 
     .sa-overlay-body p {
-      font: normal normal normal 15px/25px Oxygen;
+      font: normal normal normal 13px/25px Oxygen;
       letter-spacing: 1.7px;
       color: #434343;
       opacity: 1;
     }
 
-    
 
     @media (max-width: 900px) {
       .sa-overlay-card {
@@ -1691,12 +1655,10 @@
 
     .contact {
       position: relative;
-      min-height: 100vh;
+      min-height: 85vh;
       background: var(--bg-dark);
       color: #fff;
       display: flex;
-      align-items: center;
-      justify-content: center;
       overflow: hidden;
     }
 
@@ -1707,16 +1669,15 @@
       grid-template-columns: 1fr 1.1fr;
       align-items: center;
       width: 100%;
-      max-width: 1800px;
+      max-width: 1650px;
       padding: 0 60px;
     }
 
     /* Container for contact section text */
     .contact-copy {
       width: 100%;
-      margin-bottom: 37%;
-      max-width: 800px;       /* optional: limit width for readability */
-      padding: 0 30px;        /* horizontal padding for smaller screens */
+      margin-bottom: 43%;
+      /* optional: limit width for readability */
       box-sizing: border-box;
     }
 
